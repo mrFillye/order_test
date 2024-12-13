@@ -1,5 +1,12 @@
+import { formatCurrency } from '@/shared/utils/currencies';
 import classNames from 'classnames';
-import { InputHTMLAttributes, forwardRef, useState, ChangeEvent } from 'react';
+import {
+  InputHTMLAttributes,
+  forwardRef,
+  useState,
+  ChangeEvent,
+  useEffect,
+} from 'react';
 import styles from './index.module.scss';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -26,20 +33,9 @@ export const CurrencyInput = forwardRef<HTMLInputElement, InputProps>(
       value?.toString() || ''
     );
 
-    /**
-     * Функция форматирования числа в валютный формат
-     */
-    const formatCurrency = (value: string): string => {
-      const sanitizedValue = value.replace(/[^0-9.]/g, '');
-
-      const [integer, decimal] = sanitizedValue.split('.');
-
-      const formattedInteger = integer.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-      const formattedDecimal = decimal ? `.${decimal.slice(0, 2)}` : '';
-
-      return `${formattedInteger}${formattedDecimal}`;
-    };
+    useEffect(() => {
+      setFormattedValue(value?.toString() || '');
+    }, [value]);
 
     /**
      * Обработчик изменения значения

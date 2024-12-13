@@ -9,13 +9,4 @@ export default defineConfig({
       '@': resolve(__dirname, 'src'),
     },
   },
-  preview: {
-    port: 3000,
-    strictPort: true,
-  },
-  server: {
-    port: 3000,
-    strictPort: true,
-    host: true,
-  },
 });

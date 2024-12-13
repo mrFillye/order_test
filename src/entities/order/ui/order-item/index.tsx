@@ -1,38 +1,32 @@
 import { Card } from '@/shared/components/Card';
+import { formateDate } from '@/shared/utils/dates';
 import classNames from 'classnames';
 import { FC } from 'react';
+import { IOrder } from '../../model';
 import styles from './index.module.scss';
 
-interface IOrderItemProps {
-  amountTokens: number;
-  amountDollars: number;
-  status: 'Processing' | 'Completed';
-  createdAt: string;
-}
+type OrderItemProps = Omit<IOrder, 'id'>;
 
-export const OrderItem: FC<IOrderItemProps> = ({
+export const OrderItem: FC<OrderItemProps> = ({
   amountTokens,
   amountDollars,
   status,
   createdAt,
-}) => {
-  return (
-    <Card className={styles.orderItem}>
-      <ul>
-        <li className={styles.orderInfo}>
-          <div className={styles.orderInfoWrapper}>
-            <span className={classNames(styles.orderStatus, styles[status])}>
-              {status}
-            </span>
-            <div className={styles.orderValues}>
-              <p>USD: {amountDollars} $</p>
-              <p>Token: {amountTokens} Tokens</p>
-            </div>
+}) => (
+  <Card className={styles.orderItem}>
+    <ul>
+      <li className={styles.orderInfo}>
+        <div className={styles.orderInfoWrapper}>
+          <span className={classNames(styles.orderStatus, styles[status])}>
+            {status}
+          </span>
+          <div className={styles.orderValues}>
+            <p>USD: {amountDollars} $</p>
+            <p>Token: {amountTokens} Tokens</p>
           </div>
-          {/* TODO: сделать utils функцию */}
-          <div className={styles.orderCreatedAt}>{createdAt}</div>
-        </li>
-      </ul>
-    </Card>
-  );
-};
+        </div>
+        <div className={styles.orderCreatedAt}>{formateDate(createdAt)}</div>
+      </li>
+    </ul>
+  </Card>
+);

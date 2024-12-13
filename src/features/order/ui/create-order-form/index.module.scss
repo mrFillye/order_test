@@ -1,9 +1,30 @@
-.form {
+.formCard {
     display: flex;
+    justify-content: center;
     flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    gap: 8px;
+    max-width: 500px;
+    width: 100%;
+
+    
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+
+        .swapButton {
+            padding: 5px 0px;
+            font-size: 12px;
+            max-width: 50px;
+            margin: 5px 0px;
+            width: 100%;
+        }
+    }
+    
+    .submitButton {
+        margin-top: 10px;
+    }
 }
 
-.button {
-    margin-top: 10px;
-}
